@@ -6,10 +6,14 @@ function Question(props) {
   return (
     <div>
       {props.q}
-      <Answer ans={props.anschoice[0]} />
+      {/* <Answer ans={props.anschoice[0]} />
       <Answer ans={props.anschoice[1]} />
       <Answer ans={props.anschoice[2]} />
-      <Answer ans={props.anschoice[3]} />
+      <Answer ans={props.anschoice[3]} /> */}
+
+      {props.anschoice.map(function (choice) {
+        return <Answer ans={choice} />;
+      })}
     </div>
   );
 }
@@ -38,7 +42,6 @@ function Answer(props) {
 
 export default App;
 
-// Refactor to use map to map over all answer choices.
 // Using useState in <App />, create a boolean state variable called answerDisplayed to keep track of whether the correct answer is shown.
 // Add a button to the App component that will update the state to display the correct answer when it is clicked.
 // Create an onClick function that sets the state to display the correct answer choice when your button is clicked.
