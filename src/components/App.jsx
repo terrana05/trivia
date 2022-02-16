@@ -3,25 +3,43 @@ import "../css/App.css";
 import data from "../sample_data.json";
 
 function Question(props) {
-  return <div> Question Component </div>;
-}
-
-function App() {
   return (
-    <div className="app">
-      Trivia!
-      <Question />
+    <div>
+      {props.q}
+      <Answer ans={props.anschoice[0]} />
+      <Answer ans={props.anschoice[1]} />
+      <Answer ans={props.anschoice[2]} />
+      <Answer ans={props.anschoice[3]} />
     </div>
   );
 }
 
+function App() {
+  let questionNum = 0;
+  return (
+    <div className="app">
+      Trivia!
+      <Question
+        q={data[questionNum].question.text}
+        anschoice={data[questionNum].question.choices}
+      />
+      <NextButton />
+    </div>
+  );
+}
+
+function NextButton(props) {
+  return <button> Next Question </button>;
+}
+
+function Answer(props) {
+  return <p> {props.ans} </p>;
+}
+
 export default App;
 
-//Goal 1: Render a question from sample_data.json on the screen.
-//- [ ] In App.jsx, create a Question component.
-//- [ ] Render an instance of `<Question />` inside of `<App />`.
-//- [ ] Add props to `<Question />` with the text "Question goes here".
-//- [ ] In `<App />`, add a variable to set the current question number to 0.
-//- [ ] Replace "Question goes here" with the `question.text` field found in data for the first question.
-//  - [ ] HINT: Use the question number variable you just wrote.
-//- [ ] BONUS: Add styling to your app.//f
+// Refactor to use map to map over all answer choices.
+// Using useState in <App />, create a boolean state variable called answerDisplayed to keep track of whether the correct answer is shown.
+// Add a button to the App component that will update the state to display the correct answer when it is clicked.
+// Create an onClick function that sets the state to display the correct answer choice when your button is clicked.
+// HINT: Access the correct answer choice using sample_data.json.
