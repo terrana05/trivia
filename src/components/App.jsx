@@ -11,15 +11,37 @@ function Question(props) {
       <Answer ans={props.anschoice[2]} />
       <Answer ans={props.anschoice[3]} /> */}
 
-      {props.anschoice.map(function (choice) {
-        return <Answer ans={choice} />;
+      {props.anschoice.map(function (choice, index) {
+        return <Answer key={index} ans={choice} />;
       })}
     </div>
   );
 }
 
 function App() {
+  const [answerDisplayed, setAnswerDisplayed] = useState(false);
+
+  // function showAnswerEventHandler() {
+  //   // do soething
+  // }
+
+  // const showAnswerEventHandler = () => {
+  //   // do soemthing
+  // }
+
+  console.log("Logging the answerDisplayed variable!!", answerDisplayed);
+
   let questionNum = 0;
+  let correctAnswer = "---";
+
+  if (answerDisplayed === true) {
+    const correctIndex = data[questionNum].question.correct_choice_index;
+    correctAnswer = data[questionNum].question.choices[correctIndex];
+  }
+
+  // If answerDisplayed is true
+  // We set correctAnswer to the right correct answer
+
   return (
     <div className="app">
       Trivia!
@@ -27,7 +49,16 @@ function App() {
         q={data[questionNum].question.text}
         anschoice={data[questionNum].question.choices}
       />
+      <div>Answer: {correctAnswer}</div>
       <NextButton />
+      <button
+        onClick={() => {
+          // do soemthing
+          setAnswerDisplayed(true);
+        }}
+      >
+        Show Answer
+      </button>
     </div>
   );
 }
